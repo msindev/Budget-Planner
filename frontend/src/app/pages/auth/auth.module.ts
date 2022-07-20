@@ -6,8 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { AuthPageRoutingModule } from './auth-routing.module';
 
-import { AuthPage } from './auth.page';
 import { LoginModule } from 'src/app/components/login/login.module';
+import { SignupModule } from 'src/app/components/signup/signup.module';
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { LoginModule } from 'src/app/components/login/login.module';
     IonicModule,
     AuthPageRoutingModule,
     LoginModule,
+    SignupModule,
   ],
-  declarations: [AuthPage],
 })
 export class AuthPageModule {}

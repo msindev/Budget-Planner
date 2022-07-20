@@ -1,1 +1,46 @@
-<p>signup works!</p>
+<div class="container">
+  <ion-card class="form-container">
+    <ion-card-header>
+      <ion-card-subtitle>Budget Planner</ion-card-subtitle>
+      <ion-card-title>Register</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <ion-item lines="full">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input
+            formControlName="username"
+            type="text"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="text" required></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input
+            formControlName="password"
+            type="password"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              [disabled]="signupForm.invalid"
+              type="submit"
+              color="danger"
+              expand="block"
+              >Register</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </form>
+      Already have an account? <a routerLink="/auth/signin"> Login!</a>
+    </ion-card-content>
+  </ion-card>
+</div>
