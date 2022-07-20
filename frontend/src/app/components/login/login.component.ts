@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { AuthControllerService } from 'src/openapi-generated';
+import { AuthControllerService, JwtResponse } from 'src/openapi-generated';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
             `There was an error logging you in: ${message} `,
         }),
       )
-      .subscribe(() => {
+      .subscribe((response: JwtResponse) => {
+        localStorage.setItem('budget-planner-access-token', response.token);
         this.router.navigate(['/tabs/home']);
       });
   }
