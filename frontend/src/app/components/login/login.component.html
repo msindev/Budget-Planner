@@ -1,0 +1,41 @@
+<div class="container">
+  <ion-card class="form-container">
+    <ion-card-header>
+      <ion-card-subtitle>Budget Planner</ion-card-subtitle>
+      <ion-card-title>Login</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <ion-item lines="full">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input
+            formControlName="username"
+            type="text"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input
+            formControlName="password"
+            type="password"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              [disabled]="loginForm.invalid"
+              type="submit"
+              color="danger"
+              expand="block"
+              >Sign In</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </form>
+      New to our platform? <a routerLink="/auth/signup"> Register!</a>
+    </ion-card-content>
+  </ion-card>
+</div>
