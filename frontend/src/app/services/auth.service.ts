@@ -12,14 +12,14 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('budget-planner-access_token');
+    let authToken = localStorage.getItem('budget-planner-access-token');
     return authToken !== null ? true : false;
   }
 
   logout() {
-    let removeToken = localStorage.removeItem('budget-planner-access_token');
+    let removeToken = localStorage.removeItem('budget-planner-access-token');
     if (removeToken == null) {
-      this.router.navigate(['login']);
+      this.router.navigate(['auth/login']);
     }
   }
 }
