@@ -32,6 +32,9 @@ public class AuthService {
     @Autowired
     AuthValidation authValidation;
 
+    @Autowired
+    ExpenseService expenseService;
+
     public JwtResponse authenticateUser(LoginRequestDto loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -53,6 +56,7 @@ public class AuthService {
                 encoder.encode(signUpRequest.getPassword()));
 
         userRepository.save(user);
+        expenseService.createExpenseDocument(user.getUsername());
         return new MessageResponse("User registered successfully!");
     }
 }
