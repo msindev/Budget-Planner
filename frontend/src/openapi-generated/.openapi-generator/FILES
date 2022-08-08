@@ -3,6 +3,7 @@ README.md
 api.module.ts
 api/api.ts
 api/authController.service.ts
+api/expenseController.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -11,6 +12,7 @@ model/jwtResponse.ts
 model/loginRequestDto.ts
 model/messageResponse.ts
 model/models.ts
+model/newExpenseDto.ts
 model/objectId.ts
 model/signupRequestDto.ts
 variables.ts

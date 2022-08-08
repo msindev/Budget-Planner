@@ -3,6 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 import { AuthControllerService } from './api/authController.service';
+import { ExpenseControllerService } from './api/expenseController.service';
 
 @NgModule({
   imports:      [],
