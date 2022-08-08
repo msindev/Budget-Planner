@@ -27,6 +27,9 @@ public class ExpenseService {
     public MessageResponse addExpense(NewExpenseDto newExpense, String username) {
 
         Expense expense = new Expense(newExpense.getName(), newExpense.getCategory(), newExpense.getAmount(), newExpense.getDate());
+        if(newExpense.getDescription() != null) {
+            expense.setDescription(newExpense.getDescription());
+        }
         int year = newExpense.getDate().getYear();
         int month = newExpense.getDate().getMonthValue();
 
@@ -79,6 +82,7 @@ public class ExpenseService {
 
         Map<Integer, List<Expense>> monthlyExpenseMap = new HashMap<>();
         monthlyExpenseMap.put(month, expenseList);
+
         return new MonthlyExpense(monthlyExpenseMap);
     }
 }
