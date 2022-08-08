@@ -5,9 +5,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Add Expense</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Expense Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Expense Amount</ion-label>
+        <ion-input type="number" formControlName="amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Expense Date</ion-label>
+        <ion-datetime presentation="date" formControlName="date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Expense Category</ion-label>
+        <ion-select formControlName="category">
+          <ion-select-option value="Food">Food</ion-select-option>
+          <ion-select-option value="Transport">Transport</ion-select-option>
+          <ion-select-option value="Entertainment"
+            >Entertainment</ion-select-option
+          >
+          <ion-select-option value="Shopping">Shopping</ion-select-option>
+          <ion-select-option value="Others">Others</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Expense Description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" expand="block" [disabled]="!expenseForm.valid"
+      >Add Expense</ion-button
+    >
+  </form>
 </ion-content>
