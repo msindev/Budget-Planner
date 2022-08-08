@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit {
         }),
       )
       .subscribe((response: JwtResponse) => {
-        localStorage.setItem('budget-planner-access-token', response.token);
+        localStorage.setItem('access-token', response.token);
+        localStorage.setItem('username', response.username);
         this.router.navigate(['/tabs/home']);
       });
   }
