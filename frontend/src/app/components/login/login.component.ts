@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthControllerService, JwtResponse } from 'src/openapi-generated';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -41,6 +42,10 @@ export class LoginComponent implements OnInit {
       .subscribe((response: JwtResponse) => {
         localStorage.setItem('access-token', response.token);
         localStorage.setItem('username', response.username);
+
+        const decoded: JwtPayload = jwtDecode(response.token);
+        localStorage.setItem('expires-at', String(decoded.exp));
+
         this.router.navigate(['/tabs/home']);
       });
   }

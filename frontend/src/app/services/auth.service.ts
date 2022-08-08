@@ -17,13 +17,19 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
+    let currentTime = Math.floor(new Date().getTime() / 1000);
     let authToken = localStorage.getItem('access-token');
-    return authToken !== null ? true : false;
+    let expiresAt = localStorage.getItem('expires-at');
+    if (authToken != null && expiresAt != null && currentTime < +expiresAt) {
+      return true;
+    }
+    return false;
   }
 
   logout() {
     let removeToken = localStorage.removeItem('access-token');
     localStorage.removeItem('username');
+    localStorage.removeItem('expires-at');
     if (removeToken == null) {
       this.router.navigate(['auth/login']);
     }
