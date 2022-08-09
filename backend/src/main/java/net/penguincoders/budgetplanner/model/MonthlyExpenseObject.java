@@ -5,14 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class MonthlyExpense {
+public class MonthlyExpenseObject{
 
-    @Field("month")
-    private Map<Integer,MonthlyExpenseObject> expenses;
+    private List<Expense> expenses;
+
+    private double total;
+
+    @Field("category_total")
+    private Map<String,Double> categoryTotal;
 }
-
