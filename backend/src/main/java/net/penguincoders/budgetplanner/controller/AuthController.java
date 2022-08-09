@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import net.penguincoders.budgetplanner.exception.ValidationException;
 
 import javax.validation.Valid;
-import javax.validation.ValidationException;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,7 +24,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequest, BindingResult errors) {
         if (errors.hasErrors()) {
-            throw new ValidationException((Throwable) errors);
+            throw new ValidationException(errors);
         }
         JwtResponse jwtResponse = authService.authenticateUser(loginRequest);
         return ResponseEntity.ok(jwtResponse);
@@ -33,7 +33,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequestDto signUpRequest, BindingResult errors) {
         if (errors.hasErrors()) {
-            throw new ValidationException((Throwable) errors);
+            throw new ValidationException(errors);
         }
         MessageResponse messageResponse = authService.registerUser(signUpRequest);
         return ResponseEntity.ok(messageResponse);
