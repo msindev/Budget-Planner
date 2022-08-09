@@ -23,6 +23,5 @@ public class NewExpenseDto {
     @NotNull
     private LocalDate date;
 
-    @NotBlank
     private String description;
 }
