@@ -2,6 +2,7 @@ package net.penguincoders.budgetplanner.service;
 
 import net.penguincoders.budgetplanner.dto.request.NewExpenseDto;
 import net.penguincoders.budgetplanner.dto.response.MessageResponse;
+import net.penguincoders.budgetplanner.dto.response.MonthlyExpenseResponse;
 import net.penguincoders.budgetplanner.model.*;
 import net.penguincoders.budgetplanner.repository.ExpenseRepository;
 import org.bson.types.ObjectId;
@@ -33,6 +34,9 @@ public class ExpenseService {
         int month = newExpense.getDate().getMonthValue();
 
         ExpenseDocument expenseDocument = expenseRepository.findByUsername(username);
+        if(expenseDocument == null) {
+            return new MessageResponse("User Details Not Found in the Database.");
+        }
         Map<Integer, MonthlyExpense> yearlyExpense = expenseDocument.getYearlyExpenses();
 
         if (yearlyExpense == null) { //If the entire document is empty, creating a first expense
@@ -105,5 +109,33 @@ public class ExpenseService {
         categoryTotal.put(expense.getCategory(), expense.getAmount());
 
         return new MonthlyExpenseObject(expenseList, expense.getAmount(), categoryTotal);
+    }
+
+    public MonthlyExpenseResponse getMonthlyExpense(String year, String month, String username){
+        MonthlyExpenseResponse monthlyExpenseResponse = new MonthlyExpenseResponse(new ArrayList<>(), 0.0, new HashMap<>());
+        ExpenseDocument expenseDocument = expenseRepository.findByUsername(username);
+        if(expenseDocument == null) {
+            return monthlyExpenseResponse;
+        }
+        Map<Integer, MonthlyExpense> yearlyExpense = expenseDocument.getYearlyExpenses();
+        if(yearlyExpense == null) {
+            return monthlyExpenseResponse;
+        }
+        MonthlyExpense monthlyExpense = yearlyExpense.get(Integer.parseInt(year));
+        if(monthlyExpense == null) {
+            return monthlyExpenseResponse;
+        }
+        Map<Integer, MonthlyExpenseObject> monthlyExpenseMap = monthlyExpense.getExpenses();
+        if(monthlyExpenseMap == null) {
+            return monthlyExpenseResponse;
+        }
+        MonthlyExpenseObject monthlyExpenseObject = monthlyExpenseMap.get(Integer.parseInt(month));
+        if(monthlyExpenseObject == null) {
+            return monthlyExpenseResponse;
+        }
+        monthlyExpenseResponse.setExpenses(monthlyExpenseObject.getExpenses());
+        monthlyExpenseResponse.setTotal(monthlyExpenseObject.getTotal());
+        monthlyExpenseResponse.setCategoryTotal(monthlyExpenseObject.getCategoryTotal());
+        return monthlyExpenseResponse;
     }
 }
