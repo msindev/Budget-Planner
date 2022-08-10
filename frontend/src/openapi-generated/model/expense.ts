@@ -9,13 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ObjectId } from './objectId';
 
 
-export interface NewExpenseDto { 
-    name: string;
-    category: string;
-    amount: number;
-    date: string;
+export interface Expense { 
+    id?: ObjectId;
+    name?: string;
+    category?: string;
+    amount?: number;
+    date?: string;
     description?: string;
 }
 

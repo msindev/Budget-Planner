@@ -8,10 +8,12 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/expense.ts
 model/jwtResponse.ts
 model/loginRequestDto.ts
 model/messageResponse.ts
 model/models.ts
+model/monthlyExpenseResponse.ts
 model/newExpenseDto.ts
 model/objectId.ts
 model/signupRequestDto.ts

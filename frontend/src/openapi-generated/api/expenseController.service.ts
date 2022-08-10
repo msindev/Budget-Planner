@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { MessageResponse } from '../model/messageResponse';
 // @ts-ignore
+import { MonthlyExpenseResponse } from '../model/monthlyExpenseResponse';
+// @ts-ignore
 import { NewExpenseDto } from '../model/newExpenseDto';
 
 // @ts-ignore
@@ -161,6 +163,92 @@ export class ExpenseControllerService {
 
         return this.httpClient.post<MessageResponse>(`${this.configuration.basePath}/api/v1/expenses`,
             newExpenseDto,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param year 
+     * @param month 
+     * @param username 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getExpenses(year: string, month: string, username: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<MonthlyExpenseResponse>;
+    public getExpenses(year: string, month: string, username: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<MonthlyExpenseResponse>>;
+    public getExpenses(year: string, month: string, username: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<MonthlyExpenseResponse>>;
+    public getExpenses(year: string, month: string, username: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (year === null || year === undefined) {
+            throw new Error('Required parameter year was null or undefined when calling getExpenses.');
+        }
+        if (month === null || month === undefined) {
+            throw new Error('Required parameter month was null or undefined when calling getExpenses.');
+        }
+        if (username === null || username === undefined) {
+            throw new Error('Required parameter username was null or undefined when calling getExpenses.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (year !== undefined && year !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>year, 'year');
+        }
+        if (month !== undefined && month !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>month, 'month');
+        }
+        if (username !== undefined && username !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>username, 'username');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (bearerAuth) required
+        localVarCredential = this.configuration.lookupCredential('bearerAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<MonthlyExpenseResponse>(`${this.configuration.basePath}/api/v1/expenses`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

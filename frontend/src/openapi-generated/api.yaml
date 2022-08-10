@@ -18,6 +18,33 @@ security:
 - bearerAuth: []
 paths:
   "/api/v1/expenses":
+    get:
+      tags:
+      - expense-controller
+      operationId: getExpenses
+      parameters:
+      - name: year
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: month
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MonthlyExpenseResponse"
     post:
       tags:
       - expense-controller
@@ -84,7 +111,6 @@ components:
       - amount
       - category
       - date
-      - description
       - name
       type: object
       properties:
@@ -156,6 +182,38 @@ components:
         date:
           type: string
           format: date-time
+    Expense:
+      type: object
+      properties:
+        id:
+          "$ref": "#/components/schemas/ObjectId"
+        name:
+          type: string
+        category:
+          type: string
+        amount:
+          type: number
+          format: double
+        date:
+          type: string
+          format: date
+        description:
+          type: string
+    MonthlyExpenseResponse:
+      type: object
+      properties:
+        expenses:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Expense"
+        total:
+          type: number
+          format: double
+        categoryTotal:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
   securitySchemes:
     bearerAuth:
       type: http

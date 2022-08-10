@@ -9,13 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Expense } from './expense';
 
 
-export interface NewExpenseDto { 
-    name: string;
-    category: string;
-    amount: number;
-    date: string;
-    description?: string;
+export interface MonthlyExpenseResponse { 
+    expenses?: Array<Expense>;
+    total?: number;
+    categoryTotal?: { [key: string]: number; };
 }
 
