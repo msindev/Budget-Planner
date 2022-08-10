@@ -2,6 +2,7 @@ package net.penguincoders.budgetplanner.controller;
 
 import net.penguincoders.budgetplanner.dto.request.NewExpenseDto;
 import net.penguincoders.budgetplanner.dto.response.MessageResponse;
+import net.penguincoders.budgetplanner.dto.response.MonthlyExpenseResponse;
 import net.penguincoders.budgetplanner.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,12 @@ public class ExpenseController {
         }
         MessageResponse messageResponse = expenseService.addExpense(newExpenseDto, username);
         return ResponseEntity.ok(messageResponse);
+    }
+
+    @GetMapping()
+    public ResponseEntity<MonthlyExpenseResponse> getExpenses(@RequestParam String year, @RequestParam String month, @RequestParam String username) {
+        MonthlyExpenseResponse monthlyExpenseResponse = expenseService.getMonthlyExpense(year, month, username);
+        return ResponseEntity.ok(monthlyExpenseResponse);
     }
 
 }
