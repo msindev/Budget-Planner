@@ -49,7 +49,8 @@ public class OpenApiConfig {
 
     private List<Server> servers() {
         return List.of(
-                new Server().description("Local").url("http://localhost:8080")
+                new Server().description("Local").url("http://localhost:8080"),
+                new Server().description("Production").url("https://penguincoders-budgetplanner.herokuapp.com")
         );
     }
 
