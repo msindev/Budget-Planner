@@ -148,7 +148,7 @@ export class ExpenseControllerService {
     username: string,
     newExpenseDto: NewExpenseDto,
     observe: any = 'body',
-    reportProgress = false,
+    reportProgress: boolean = false,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
   ): Observable<any> {
     if (username === null || username === undefined) {
@@ -279,7 +279,7 @@ export class ExpenseControllerService {
     month: string,
     username: string,
     observe: any = 'body',
-    reportProgress = false,
+    reportProgress: boolean = false,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
   ): Observable<any> {
     if (year === null || year === undefined) {

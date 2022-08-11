@@ -145,7 +145,7 @@ export class AuthControllerService {
   public authenticateUser(
     loginRequestDto: LoginRequestDto,
     observe: any = 'body',
-    reportProgress = false,
+    reportProgress: boolean = false,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
   ): Observable<any> {
     if (loginRequestDto === null || loginRequestDto === undefined) {
@@ -251,7 +251,7 @@ export class AuthControllerService {
   public registerUser(
     signupRequestDto: SignupRequestDto,
     observe: any = 'body',
-    reportProgress = false,
+    reportProgress: boolean = false,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
   ): Observable<any> {
     if (signupRequestDto === null || signupRequestDto === undefined) {
