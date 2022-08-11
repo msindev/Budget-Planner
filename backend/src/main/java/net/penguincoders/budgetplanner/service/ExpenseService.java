@@ -9,10 +9,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ExpenseService {
@@ -133,7 +130,9 @@ public class ExpenseService {
         if(monthlyExpenseObject == null) {
             return monthlyExpenseResponse;
         }
-        monthlyExpenseResponse.setExpenses(monthlyExpenseObject.getExpenses());
+        List<Expense> expenses = monthlyExpenseObject.getExpenses();
+        Collections.reverse(expenses);
+        monthlyExpenseResponse.setExpenses(expenses);
         monthlyExpenseResponse.setTotal(monthlyExpenseObject.getTotal());
         monthlyExpenseResponse.setCategoryTotal(monthlyExpenseObject.getCategoryTotal());
         return monthlyExpenseResponse;
