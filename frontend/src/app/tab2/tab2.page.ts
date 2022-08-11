@@ -33,7 +33,7 @@ export class Tab2Page {
   onSubmit() {
     console.log(this.expenseForm.value);
     const username = this.authService.getUsername();
-    let expense = { ...this.expenseForm.value };
+    const expense = { ...this.expenseForm.value };
     expense.date = this.datePipe.transform(expense.date, 'yyyy-MM-dd');
     this.expenseService
       .addExpense(username, expense)

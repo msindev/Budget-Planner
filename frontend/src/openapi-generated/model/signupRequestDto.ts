@@ -10,10 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-export interface SignupRequestDto { 
-    username: string;
-    email: string;
-    password: string;
+export interface SignupRequestDto {
+  username: string;
+  email: string;
+  password: string;
 }
-

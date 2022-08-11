@@ -10,8 +10,6 @@
  * Do not edit the class manually.
  */
 
-
-export interface MessageResponse { 
-    message?: string;
+export interface MessageResponse {
+  message?: string;
 }
-

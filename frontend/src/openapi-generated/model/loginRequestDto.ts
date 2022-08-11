@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-
-export interface LoginRequestDto { 
-    username: string;
-    password: string;
+export interface LoginRequestDto {
+  username: string;
+  password: string;
 }
-

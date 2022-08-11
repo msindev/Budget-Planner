@@ -11,12 +11,10 @@
  */
 import { ObjectId } from './objectId';
 
-
-export interface JwtResponse { 
-    token?: string;
-    id?: ObjectId;
-    username?: string;
-    email?: string;
-    type?: string;
+export interface JwtResponse {
+  token?: string;
+  id?: ObjectId;
+  username?: string;
+  email?: string;
+  type?: string;
 }
-

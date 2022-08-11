@@ -12,14 +12,14 @@ export class AuthService {
   }
 
   getUsername(): string {
-    let username = localStorage.getItem('username');
+    const username = localStorage.getItem('username');
     return username !== null ? username : '';
   }
 
   get isLoggedIn(): boolean {
-    let currentTime = Math.floor(new Date().getTime() / 1000);
-    let authToken = localStorage.getItem('access-token');
-    let expiresAt = localStorage.getItem('expires-at');
+    const currentTime = Math.floor(new Date().getTime() / 1000);
+    const authToken = localStorage.getItem('access-token');
+    const expiresAt = localStorage.getItem('expires-at');
     if (authToken != null && expiresAt != null && currentTime < +expiresAt) {
       return true;
     }
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   logout() {
-    let removeToken = localStorage.removeItem('access-token');
+    const removeToken = localStorage.removeItem('access-token');
     localStorage.removeItem('username');
     localStorage.removeItem('expires-at');
     if (removeToken == null) {

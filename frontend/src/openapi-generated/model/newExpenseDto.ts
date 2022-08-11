@@ -10,12 +10,10 @@
  * Do not edit the class manually.
  */
 
-
-export interface NewExpenseDto { 
-    name: string;
-    category: string;
-    amount: number;
-    date: string;
-    description?: string;
+export interface NewExpenseDto {
+  name: string;
+  category: string;
+  amount: number;
+  date: string;
+  description?: string;
 }
-

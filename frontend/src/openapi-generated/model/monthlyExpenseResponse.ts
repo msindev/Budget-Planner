@@ -11,10 +11,8 @@
  */
 import { Expense } from './expense';
 
-
-export interface MonthlyExpenseResponse { 
-    expenses?: Array<Expense>;
-    total?: number;
-    categoryTotal?: { [key: string]: number; };
+export interface MonthlyExpenseResponse {
+  expenses?: Array<Expense>;
+  total?: number;
+  categoryTotal?: { [key: string]: number };
 }
-

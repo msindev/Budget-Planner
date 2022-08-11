@@ -11,13 +11,11 @@
  */
 import { ObjectId } from './objectId';
 
-
-export interface Expense { 
-    id?: ObjectId;
-    name?: string;
-    category?: string;
-    amount?: number;
-    date?: string;
-    description?: string;
+export interface Expense {
+  id?: ObjectId;
+  name?: string;
+  category?: string;
+  amount?: number;
+  date?: string;
+  description?: string;
 }
-

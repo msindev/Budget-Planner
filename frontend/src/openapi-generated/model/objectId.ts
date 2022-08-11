@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-
-export interface ObjectId { 
-    timestamp?: number;
-    date?: string;
+export interface ObjectId {
+  timestamp?: number;
+  date?: string;
 }
-
