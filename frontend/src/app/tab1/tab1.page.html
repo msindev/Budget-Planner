@@ -4,10 +4,83 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" [scrollEvents]="true">
+  <ion-list *ngIf="!isLoading else loaderTemplate">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Total Expenses</ion-card-subtitle>
+        <ion-card-title
+          >{{monthlyExpense?.total | currency:'INR'}}</ion-card-title
+        >
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Category Wise Expenses</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas baseChart [data]="barChartData" [type]="'bar'"> </canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list-header>
+      <ion-label>Expenses</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let expense of monthlyExpense?.expenses">
+      <ion-icon
+        [name]="categoryExpenseIcon[expense.category].name"
+        [color]="categoryExpenseIcon[expense.category].color"
+        slot="start"
+      ></ion-icon>
+      <ion-label>
+        <h2>{{expense.name}}</h2>
+        <p>{{expense.date | date:'MMM dd'}}</p>
+      </ion-label>
+
+      <ion-label slot="end">
+        <h3 class="align-right">{{expense.amount | currency:'INR'}}</h3>
+        <p class="align-right">{{expense.description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #loaderTemplate>
+    <ion-list>
+      <ion-list-header>
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 80px"
+        ></ion-skeleton-text>
+      </ion-list-header>
+      <div *ngFor="let item of [].constructor(5); let i = index">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%"
+              ></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 60%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 30%"
+              ></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ng-template>
 </ion-content>
