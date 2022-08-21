@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler) {
     const authToken = this.authService.getToken();
     req = req.clone({
       setHeaders: {
