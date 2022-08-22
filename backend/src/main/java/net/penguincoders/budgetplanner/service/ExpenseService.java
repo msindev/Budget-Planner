@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.util.Comparator.comparing;
+
 @Service
 public class ExpenseService {
 
@@ -131,7 +133,7 @@ public class ExpenseService {
             return monthlyExpenseResponse;
         }
         List<Expense> expenses = monthlyExpenseObject.getExpenses();
-        Collections.reverse(expenses);
+        expenses.sort(comparing(Expense::getDate).reversed());
         monthlyExpenseResponse.setExpenses(expenses);
         monthlyExpenseResponse.setTotal(monthlyExpenseObject.getTotal());
         monthlyExpenseResponse.setCategoryTotal(monthlyExpenseObject.getCategoryTotal());
