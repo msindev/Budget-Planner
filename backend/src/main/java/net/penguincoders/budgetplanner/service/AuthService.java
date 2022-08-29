@@ -1,5 +1,6 @@
 package net.penguincoders.budgetplanner.service;
 
+import net.penguincoders.budgetplanner.dto.request.ChangePasswordRequestDto;
 import net.penguincoders.budgetplanner.dto.request.LoginRequestDto;
 import net.penguincoders.budgetplanner.dto.request.SignupRequestDto;
 import net.penguincoders.budgetplanner.dto.response.JwtResponse;
@@ -16,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -58,5 +61,21 @@ public class AuthService {
         userRepository.save(user);
         expenseService.createExpenseDocument(user.getUsername());
         return new MessageResponse("User registered successfully!");
+    }
+
+    public MessageResponse changePassword(ChangePasswordRequestDto changePasswordRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            String oldPassword = user.get().getPassword();
+            if (encoder.matches(changePasswordRequest.getOldPassword(), oldPassword)) {
+                user.get().setPassword(encoder.encode(changePasswordRequest.getNewPassword()));
+                userRepository.save(user.get());
+                return new MessageResponse("Password changed successfully!");
+            } else {
+                return new MessageResponse("Wrong Password Entered, please try again!");
+            }
+        }
+        return new MessageResponse("User not found!");
     }
 }

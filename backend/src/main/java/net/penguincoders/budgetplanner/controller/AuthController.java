@@ -1,15 +1,16 @@
 package net.penguincoders.budgetplanner.controller;
 
+import net.penguincoders.budgetplanner.dto.request.ChangePasswordRequestDto;
 import net.penguincoders.budgetplanner.dto.request.LoginRequestDto;
 import net.penguincoders.budgetplanner.dto.request.SignupRequestDto;
 import net.penguincoders.budgetplanner.dto.response.JwtResponse;
 import net.penguincoders.budgetplanner.dto.response.MessageResponse;
+import net.penguincoders.budgetplanner.exception.ValidationException;
 import net.penguincoders.budgetplanner.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import net.penguincoders.budgetplanner.exception.ValidationException;
 
 import javax.validation.Valid;
 
@@ -36,6 +37,15 @@ public class AuthController {
             throw new ValidationException(errors);
         }
         MessageResponse messageResponse = authService.registerUser(signUpRequest);
+        return ResponseEntity.ok(messageResponse);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<MessageResponse> changePassword(@Valid @RequestBody ChangePasswordRequestDto changePasswordRequest, BindingResult errors) {
+        if (errors.hasErrors()) {
+            throw new ValidationException(errors);
+        }
+        MessageResponse messageResponse = authService.changePassword(changePasswordRequest);
         return ResponseEntity.ok(messageResponse);
     }
 }
