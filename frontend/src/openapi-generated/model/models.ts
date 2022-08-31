@@ -1,3 +1,4 @@
+export * from './changePasswordRequestDto';
 export * from './expense';
 export * from './jwtResponse';
 export * from './loginRequestDto';

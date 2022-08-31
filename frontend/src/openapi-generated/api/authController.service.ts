@@ -11,19 +11,21 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional } from '@angular/core';
 import {
   HttpClient,
+  HttpContext,
+  HttpEvent,
   HttpHeaders,
+  HttpParameterCodec,
   HttpParams,
   HttpResponse,
-  HttpEvent,
-  HttpParameterCodec,
-  HttpContext,
 } from '@angular/common/http';
-import { CustomHttpParameterCodec } from '../encoder';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CustomHttpParameterCodec } from '../encoder';
 
+// @ts-ignore
+import { ChangePasswordRequestDto } from '../model/changePasswordRequestDto';
 // @ts-ignore
 import { JwtResponse } from '../model/jwtResponse';
 // @ts-ignore
@@ -34,8 +36,8 @@ import { MessageResponse } from '../model/messageResponse';
 import { SignupRequestDto } from '../model/signupRequestDto';
 
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { Configuration } from '../configuration';
+import { BASE_PATH } from '../variables';
 
 @Injectable({
   providedIn: 'root',
@@ -214,6 +216,115 @@ export class AuthControllerService {
     return this.httpClient.post<JwtResponse>(
       `${this.configuration.basePath}/api/v1/auth/signin`,
       loginRequestDto,
+      {
+        context: localVarHttpContext,
+        responseType: <any>responseType_,
+        withCredentials: this.configuration.withCredentials,
+        headers: localVarHeaders,
+        observe: observe,
+        reportProgress: reportProgress,
+      },
+    );
+  }
+
+  /**
+   * @param changePasswordRequestDto
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public changePassword(
+    changePasswordRequestDto: ChangePasswordRequestDto,
+    observe?: 'body',
+    reportProgress?: boolean,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
+  ): Observable<MessageResponse>;
+  public changePassword(
+    changePasswordRequestDto: ChangePasswordRequestDto,
+    observe?: 'response',
+    reportProgress?: boolean,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
+  ): Observable<HttpResponse<MessageResponse>>;
+  public changePassword(
+    changePasswordRequestDto: ChangePasswordRequestDto,
+    observe?: 'events',
+    reportProgress?: boolean,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
+  ): Observable<HttpEvent<MessageResponse>>;
+  public changePassword(
+    changePasswordRequestDto: ChangePasswordRequestDto,
+    observe: any = 'body',
+    reportProgress: boolean = false,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext },
+  ): Observable<any> {
+    if (
+      changePasswordRequestDto === null ||
+      changePasswordRequestDto === undefined
+    ) {
+      throw new Error(
+        'Required parameter changePasswordRequestDto was null or undefined when calling changePassword.',
+      );
+    }
+
+    let localVarHeaders = this.defaultHeaders;
+
+    let localVarCredential: string | undefined;
+    // authentication (bearerAuth) required
+    localVarCredential = this.configuration.lookupCredential('bearerAuth');
+    if (localVarCredential) {
+      localVarHeaders = localVarHeaders.set(
+        'Authorization',
+        'Bearer ' + localVarCredential,
+      );
+    }
+
+    let localVarHttpHeaderAcceptSelected: string | undefined =
+      options && options.httpHeaderAccept;
+    if (localVarHttpHeaderAcceptSelected === undefined) {
+      // to determine the Accept header
+      const httpHeaderAccepts: string[] = ['application/json'];
+      localVarHttpHeaderAcceptSelected =
+        this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    }
+    if (localVarHttpHeaderAcceptSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set(
+        'Accept',
+        localVarHttpHeaderAcceptSelected,
+      );
+    }
+
+    let localVarHttpContext: HttpContext | undefined =
+      options && options.context;
+    if (localVarHttpContext === undefined) {
+      localVarHttpContext = new HttpContext();
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = ['application/json'];
+    const httpContentTypeSelected: string | undefined =
+      this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set(
+        'Content-Type',
+        httpContentTypeSelected,
+      );
+    }
+
+    let responseType_: 'text' | 'json' | 'blob' = 'json';
+    if (localVarHttpHeaderAcceptSelected) {
+      if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+        responseType_ = 'text';
+      } else if (
+        this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)
+      ) {
+        responseType_ = 'json';
+      } else {
+        responseType_ = 'blob';
+      }
+    }
+
+    return this.httpClient.post<MessageResponse>(
+      `${this.configuration.basePath}/api/v1/auth/change-password`,
+      changePasswordRequestDto,
       {
         context: localVarHttpContext,
         responseType: <any>responseType_,
