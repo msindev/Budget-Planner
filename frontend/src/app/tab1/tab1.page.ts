@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
+import { ChartData } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { tap } from 'rxjs/operators';
 import {
   ExpenseControllerService,
   MonthlyExpenseResponse,
 } from 'src/openapi-generated';
 import { AuthService } from '../services/auth.service';
-import { tap } from 'rxjs/operators';
-import { ChartData } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-tab1',
@@ -20,8 +20,10 @@ export class Tab1Page {
   categoryExpenseIcon = {
     food: { name: 'fast-food', color: 'danger' },
     transport: { name: 'car', color: 'secondary' },
-    entertainment: { name: 'game-controller', color: 'success' },
+    entertainment: { name: 'game-controller', color: 'dark' },
     shopping: { name: 'cart', color: 'warning' },
+    home: { name: 'home', color: 'primary' },
+    investments: { name: 'investments', color: 'success' },
     others: { name: 'wallet', color: 'medium' },
   };
 
@@ -30,6 +32,8 @@ export class Tab1Page {
     'Transport',
     'Entertainment',
     'Shopping',
+    'Home',
+    'Investments',
     'Others',
   ];
 

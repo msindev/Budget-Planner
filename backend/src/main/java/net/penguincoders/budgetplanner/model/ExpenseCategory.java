@@ -5,5 +5,7 @@ public enum ExpenseCategory {
     ENTERTAINMENT,
     SHOPPING,
     TRANSPORT,
+    HOME,
+    INVESTMENTS,
     OTHERS
 }
