@@ -8,6 +8,7 @@ import net.penguincoders.budgetplanner.dto.response.MessageResponse;
 import net.penguincoders.budgetplanner.exception.ValidationException;
 import net.penguincoders.budgetplanner.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,9 @@ public class AuthController {
             throw new ValidationException(errors);
         }
         MessageResponse messageResponse = authService.changePassword(changePasswordRequest);
-        return ResponseEntity.ok(messageResponse);
+        if(messageResponse.getMessage().equals("Password changed successfully!")) {
+            return ResponseEntity.ok(messageResponse);
+        }
+        return new ResponseEntity<>(messageResponse,HttpStatus.BAD_REQUEST);
     }
 }

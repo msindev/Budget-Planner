@@ -8,6 +8,7 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/changePasswordRequestDto.ts
 model/expense.ts
 model/jwtResponse.ts
 model/loginRequestDto.ts

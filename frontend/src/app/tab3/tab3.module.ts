@@ -1,10 +1,11 @@
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Tab3Page } from './tab3.page';
 
+import { ChangePasswordModule } from '../components/change-password/change-password.module';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    ChangePasswordModule,
   ],
   declarations: [Tab3Page],
 })

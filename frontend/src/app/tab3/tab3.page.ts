@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,9 +8,17 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page {
-  constructor(private authService: AuthService, private router: Router) {}
+  @ViewChild(IonModal) changePasswordModal: IonModal;
+  constructor(private authService: AuthService) {}
 
   logout() {
     this.authService.logout();
+  }
+
+  passwordChangeEventHandler(isPasswordChanged: boolean) {
+    this.changePasswordModal.dismiss();
+    if (isPasswordChanged) {
+      this.logout();
+    }
   }
 }
