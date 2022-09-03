@@ -23,7 +23,7 @@ export class Tab1Page {
     entertainment: { name: 'game-controller', color: 'dark' },
     shopping: { name: 'cart', color: 'warning' },
     home: { name: 'home', color: 'primary' },
-    investments: { name: 'investments', color: 'success' },
+    investments: { name: 'card', color: 'success' },
     others: { name: 'wallet', color: 'medium' },
   };
 
