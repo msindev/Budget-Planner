@@ -5,18 +5,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button expand="block" id="open-modal">
-    <ion-icon slot="start" name="lock-open"> </ion-icon> Change Password
-  </ion-button>
   <ion-modal trigger="open-modal">
     <ng-template>
       <app-change-password
         (modalEvent)="passwordChangeEventHandler($event)"
       ></app-change-password></ng-template
   ></ion-modal>
+  <app-monthly-budget></app-monthly-budget>
 </ion-content>
 
 <ion-footer>
+  <ion-button expand="block" id="open-modal">
+    <ion-icon slot="start" name="lock-open"> </ion-icon> Change Password
+  </ion-button>
   <ion-button expand="block" color="danger" (click)="logout()">
     <ion-icon slot="start" name="log-out"> </ion-icon> Logout
   </ion-button>
