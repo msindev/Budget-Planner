@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Comparator.comparing;
+
 @Repository
 public class ExpenseDaoImpl implements ExpenseDao {
 
@@ -67,6 +69,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         ExpenseDocument expenseDocument = mongoTemplate.findOne(monthExistsQuery, ExpenseDocument.class);
         if (expenseDocument != null) {
             MonthlyExpenseObject monthlyExpenseObject = expenseDocument.getYearlyExpenses().get(year).getExpenses().get(month);
+            monthlyExpenseObject.getExpenses().sort(comparing(Expense::getDate).reversed());
             monthlyExpenseResponse = new MonthlyExpenseResponse(monthlyExpenseObject.getExpenses(),
                     monthlyExpenseObject.getTotal(), monthlyExpenseObject.getCategoryTotal());
             return monthlyExpenseResponse;
