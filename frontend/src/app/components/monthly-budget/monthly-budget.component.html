@@ -1,0 +1,32 @@
+<ion-item-divider lines="none">
+  <ion-icon slot="start" name="calendar-outline"></ion-icon>
+  <ion-label>Monthly Budget</ion-label>
+</ion-item-divider>
+<ng-container *ngIf="!isEditing; else editingTemplate">
+  <ion-item>
+    <ion-label>{{
+      (monthlyBudgetObs$ | async)?.monthlyBudget | currency: 'INR'
+    }}</ion-label>
+    <ion-icon
+      slot="end"
+      name="pencil-outline"
+      size="small"
+      (click)="isEditing = true"
+    ></ion-icon>
+  </ion-item>
+</ng-container>
+
+<ng-template #editingTemplate>
+  <form [formGroup]="budgetForm" (ngSubmit)="setBudget()">
+    <ion-item>
+      <ion-input
+        type="number"
+        placeholder="Enter Budget"
+        formControlName="budget"
+      ></ion-input>
+      <ion-button [disabled]="budgetForm.invalid" type="submit" size="small"
+        >OK</ion-button
+      >
+    </ion-item>
+  </form>
+</ng-template>
