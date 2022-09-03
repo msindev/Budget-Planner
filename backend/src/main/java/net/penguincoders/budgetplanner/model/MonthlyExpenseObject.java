@@ -1,8 +1,6 @@
 package net.penguincoders.budgetplanner.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
@@ -15,8 +13,11 @@ public class MonthlyExpenseObject{
 
     private List<Expense> expenses;
 
-    private double total;
+    private Double total;
 
     @Field("category_total")
     private Map<String,Double> categoryTotal;
+
+    @Field("monthly_budget")
+    private Double monthlyBudget;
 }
