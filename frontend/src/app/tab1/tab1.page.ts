@@ -50,8 +50,8 @@ export class Tab1Page {
   ) {}
 
   ionViewWillEnter() {
-    const month = (new Date().getMonth() + 1).toString();
-    const year = new Date().getFullYear().toString();
+    const month = new Date().getMonth() + 1;
+    const year = new Date().getFullYear();
     const username = this.authService.getUsername();
 
     this.expenseService

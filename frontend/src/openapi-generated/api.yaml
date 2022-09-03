@@ -29,12 +29,14 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            type: integer
+            format: int32
         - name: month
           in: query
           required: true
           schema:
-            type: string
+            type: integer
+            format: int32
         - name: username
           in: query
           required: true
@@ -62,6 +64,71 @@ paths:
           application/json:
             schema:
               '$ref': '#/components/schemas/NewExpenseDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/MessageResponse'
+  '/api/v1/expenses/budget':
+    get:
+      tags:
+        - expense-controller
+      operationId: getMonthlyBudget
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/MonthlyBudgetResponse'
+    post:
+      tags:
+        - expense-controller
+      operationId: setMonthlyBudget
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/MonthlyBudgetDto'
         required: true
       responses:
         '200':
@@ -151,6 +218,14 @@ components:
       properties:
         message:
           type: string
+    MonthlyBudgetDto:
+      required:
+        - budget
+      type: object
+      properties:
+        budget:
+          type: number
+          format: double
     SignupRequestDto:
       required:
         - email
@@ -244,6 +319,12 @@ components:
           additionalProperties:
             type: number
             format: double
+    MonthlyBudgetResponse:
+      type: object
+      properties:
+        monthlyBudget:
+          type: number
+          format: double
   securitySchemes:
     bearerAuth:
       type: http

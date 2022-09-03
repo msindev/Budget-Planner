@@ -14,6 +14,8 @@ model/jwtResponse.ts
 model/loginRequestDto.ts
 model/messageResponse.ts
 model/models.ts
+model/monthlyBudgetDto.ts
+model/monthlyBudgetResponse.ts
 model/monthlyExpenseResponse.ts
 model/newExpenseDto.ts
 model/objectId.ts
