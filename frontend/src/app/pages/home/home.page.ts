@@ -6,7 +6,7 @@ import {
   ExpenseControllerService,
   MonthlyExpenseResponse,
 } from 'src/openapi-generated';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-tab-home',

@@ -1,13 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
+  selector: 'app-tab-profile',
+  templateUrl: 'profile.page.html',
+  styleUrls: ['profile.page.scss'],
 })
-export class Tab3Page {
+export class ProfilePageComponent {
   @ViewChild(IonModal) changePasswordModal: IonModal;
   constructor(private authService: AuthService) {}
 
