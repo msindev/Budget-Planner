@@ -4,14 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { ExpenseControllerService } from 'src/openapi-generated';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-tab-add',
+  templateUrl: 'add.page.html',
+  styleUrls: ['add.page.scss'],
 })
-export class Tab2Page {
+export class AddPageComponent {
   expenseForm: FormGroup;
   constructor(
     private fb: FormBuilder,

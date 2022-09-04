@@ -10,22 +10,26 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () =>
-          import('../home/home.module').then((m) => m.HomePageModule),
+          import('../pages/home/home.module').then((m) => m.HomePageModule),
       },
       {
         path: 'add',
         loadChildren: () =>
-          import('../tab2/tab2.module').then((m) => m.Tab2PageModule),
+          import('../pages/add/add.module').then((m) => m.AddPageModule),
       },
       {
         path: 'reports',
         loadChildren: () =>
-          import('../reports/reports.module').then((m) => m.ReportsPageModule),
+          import('../pages/reports/reports.module').then(
+            (m) => m.ReportsPageModule,
+          ),
       },
       {
         path: 'profile',
         loadChildren: () =>
-          import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
+          import('../pages/profile/profile.module').then(
+            (m) => m.ProfilePageModule,
+          ),
       },
       {
         path: '',
