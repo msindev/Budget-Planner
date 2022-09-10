@@ -4,4 +4,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ng-container *ngIf="!isCardChartLoading">
+    <ion-list-header mode="ios">Category Expenses:</ion-list-header>
+    <ngx-charts-number-card
+      [results]="cardChartValues"
+      [view]="cardChartView"
+      [scheme]="colorScheme"
+    >
+    </ngx-charts-number-card>
+  </ng-container>
+</ion-content>
