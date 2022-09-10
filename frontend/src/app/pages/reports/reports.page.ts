@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { forkJoin } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ExpenseControllerService } from '../../../openapi-generated';
@@ -20,7 +21,10 @@ export class ReportsPageComponent {
   categoryTotal: { [key: string]: number };
   cardChartValues: ICardChart[] = [];
   isCardChartLoading = true;
-  colorScheme = {
+  colorScheme: Color = {
+    name: 'cardColorScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
     domain: ['#FFA500', '#EE4B2B', '#219819'],
   };
 
