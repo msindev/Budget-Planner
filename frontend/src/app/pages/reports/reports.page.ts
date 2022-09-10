@@ -20,7 +20,7 @@ export class ReportsPageComponent {
   monthlyBudget: number;
   categoryTotal: { [key: string]: number };
   cardChartValues: ICardChart[] = [];
-  isCardChartLoading = true;
+  isCardChartLoading: boolean;
   colorScheme: Color = {
     name: 'cardColorScheme',
     selectable: true,
@@ -37,6 +37,8 @@ export class ReportsPageComponent {
     const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
     const username = this.authService.getUsername();
+    this.isCardChartLoading = true;
+    this.cardChartValues = [];
     const categoryWiseExpensesObs = this.expenseService
       .getExpenses(year, month, username)
       .pipe(
